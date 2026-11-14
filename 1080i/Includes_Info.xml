@@ -517,6 +517,11 @@
                         <param name="container">$PARAM[container]</param>
                         <param name="listitem">$PARAM[listitem]</param>
                     </include>
+                    <include content="Info_Line_AudioCodec_Pill" condition="Skin.HasSetting(InfoTags.EnableAudioChannels)">
+                        <param name="colordiffuse">$PARAM[colordiffuse]</param>
+                        <param name="container">$PARAM[container]</param>
+                        <param name="listitem">$PARAM[listitem]</param>
+                    </include>
                     <include content="Info_Line_AudioChannels_Resolution" condition="Skin.HasSetting(InfoTags.EnableAudioChannels)">
                         <param name="colordiffuse">$PARAM[colordiffuse]</param>
                         <param name="container">$PARAM[container]</param>
@@ -762,7 +767,7 @@
         <definition>
             <include content="Info_Line_Pill_Text">
                 <param name="colordiffuse">$PARAM[colordiffuse]</param>
-                <param name="label">DV</param>
+                <param name="label">Dolby Vision</param>
                 <param name="visible">$PARAM[visible] + String.IsEqual($PARAM[container]$PARAM[listitem].HdrType,dolbyvision)</param>
                 <param name="width">auto</param>
             </include>
@@ -843,6 +848,79 @@
                 <param name="label">1.0</param>
                 <param name="visible">$PARAM[visible] + Integer.IsEqual($PARAM[container]$PARAM[listitem].AudioChannels,1)</param>
                 <param name="width">60</param>
+            </include>
+        </definition>
+    </include>
+
+    <include name="Info_Line_AudioCodec_Pill">
+        <param name="visible">true</param>
+        <definition>
+            <include content="Info_Line_Pill_Text">
+                <param name="colordiffuse">$PARAM[colordiffuse]</param>
+                <param name="label">DD</param>
+                <param name="visible">$PARAM[visible] + String.IsEqual($PARAM[container]$PARAM[listitem].AudioCodec,ac3)</param>
+                <param name="width">auto</param>
+            </include>
+            <include content="Info_Line_Pill_Text">
+                <param name="colordiffuse">$PARAM[colordiffuse]</param>
+                <param name="label">DD+</param>
+                <param name="visible">$PARAM[visible] + String.IsEqual($PARAM[container]$PARAM[listitem].AudioCodec,eac3)</param>
+                <param name="width">auto</param>
+            </include>
+            <include content="Info_Line_Pill_Text">
+                <param name="colordiffuse">$PARAM[colordiffuse]</param>
+                <param name="label">DD+ ATMOS</param>
+                <param name="visible">$PARAM[visible] + String.IsEqual($PARAM[container]$PARAM[listitem].AudioCodec,eac3_ddp_atmos)</param>
+                <param name="width">auto</param>
+            </include>
+            <include content="Info_Line_Pill_Text">
+                <param name="colordiffuse">$PARAM[colordiffuse]</param>
+                <param name="label">TRUEHD</param>
+                <param name="visible">$PARAM[visible] + String.IsEqual($PARAM[container]$PARAM[listitem].AudioCodec,truehd)</param>
+                <param name="width">auto</param>
+            </include>
+            <include content="Info_Line_Pill_Text">
+                <param name="colordiffuse">$PARAM[colordiffuse]</param>
+                <param name="label">TRUEHD ATMOS</param>
+                <param name="visible">$PARAM[visible] + String.IsEqual($PARAM[container]$PARAM[listitem].AudioCodec,truehd_atmos)</param>
+                <param name="width">auto</param>
+            </include>
+            <include content="Info_Line_Pill_Text">
+                <param name="colordiffuse">$PARAM[colordiffuse]</param>
+                <param name="label">DTS</param>
+                <param name="visible">$PARAM[visible] + String.IsEqual($PARAM[container]$PARAM[listitem].AudioCodec,dts)</param>
+                <param name="width">auto</param>
+            </include>
+            <include content="Info_Line_Pill_Text">
+                <param name="colordiffuse">$PARAM[colordiffuse]</param>
+                <param name="label">DTS-HD HRA</param>
+                <param name="visible">$PARAM[visible] + String.IsEqual($PARAM[container]$PARAM[listitem].AudioCodec,dtshd_hra)</param>
+                <param name="width">auto</param>
+            </include>
+            <include content="Info_Line_Pill_Text">
+                <param name="colordiffuse">$PARAM[colordiffuse]</param>
+                <param name="label">DTS-HD MA</param>
+                <param name="visible">$PARAM[visible] + String.IsEqual($PARAM[container]$PARAM[listitem].AudioCodec,dtshd_ma)</param>
+                <param name="width">auto</param>
+            </include>
+            <include content="Info_Line_Pill_Text">
+                <param name="colordiffuse">$PARAM[colordiffuse]</param>
+                <param name="label">DTS:X</param>
+                <param name="visible">$PARAM[visible] + String.IsEqual($PARAM[container]$PARAM[listitem].AudioCodec,dtshd_ma_x)</param>
+                <param name="width">auto</param>
+            </include>
+            <include content="Info_Line_Pill_Text">
+                <param name="colordiffuse">$PARAM[colordiffuse]</param>
+                <param name="label">DTS:X IMAX</param>
+                <param name="visible">$PARAM[visible] + String.IsEqual($PARAM[container]$PARAM[listitem].AudioCodec,dtshd_ma_x_imax)</param>
+                <param name="width">auto</param>
+            </include>
+            <!-- Any other codec (AAC, FLAC, PCM...) shows its raw name -->
+            <include content="Info_Line_Pill_Text">
+                <param name="colordiffuse">$PARAM[colordiffuse]</param>
+                <param name="label">[UPPERCASE]$INFO[$PARAM[container]$PARAM[listitem].AudioCodec][/UPPERCASE]</param>
+                <param name="visible">$PARAM[visible] + !String.IsEmpty($PARAM[container]$PARAM[listitem].AudioCodec) + !String.IsEqual($PARAM[container]$PARAM[listitem].AudioCodec,ac3) + !String.IsEqual($PARAM[container]$PARAM[listitem].AudioCodec,eac3) + !String.IsEqual($PARAM[container]$PARAM[listitem].AudioCodec,eac3_ddp_atmos) + !String.IsEqual($PARAM[container]$PARAM[listitem].AudioCodec,truehd) + !String.IsEqual($PARAM[container]$PARAM[listitem].AudioCodec,truehd_atmos) + !String.IsEqual($PARAM[container]$PARAM[listitem].AudioCodec,dts) + !String.IsEqual($PARAM[container]$PARAM[listitem].AudioCodec,dtshd_hra) + !String.IsEqual($PARAM[container]$PARAM[listitem].AudioCodec,dtshd_ma) + !String.IsEqual($PARAM[container]$PARAM[listitem].AudioCodec,dtshd_ma_x) + !String.IsEqual($PARAM[container]$PARAM[listitem].AudioCodec,dtshd_ma_x_imax)</param>
+                <param name="width">auto</param>
             </include>
         </definition>
     </include>
